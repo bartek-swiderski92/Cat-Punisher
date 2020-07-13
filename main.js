@@ -18,15 +18,16 @@ const removeButtons = () => {
     const removePunishmentBtn = document.querySelector('.removePunishment');
 
     const removeReward = () => {
-        console.log('click');
+        console.log(rewardList.indexOf('Reward1'));
+
     }
 
     const removePunishment = () => {
         console.log('click');
     }
 
-    // removeRewardBtn.addEventListener('click', removeReward)
-    // removePunishmentBtn.addEventListener('click', removePunishment)
+    removeRewardBtn.addEventListener('click', removeReward)
+    removePunishmentBtn.addEventListener('click', removePunishment)
 }
 
 const showOptions = function () {
@@ -37,7 +38,7 @@ const showOptions = function () {
             const li = document.createElement('li');
             const x = document.createElement('span');
             x.innerHTML = ' X';
-            x.classList = `removeReward${i}`
+            x.classList = `removeReward`
             ulRewards.appendChild(li);
             li.textContent = rewardList[i];
             li.appendChild(x);
@@ -77,13 +78,12 @@ const addReward = function (e) {
 }
 const addPunishment = function (e) {
     e.preventDefault();
-    if (input.value) {
-        console.log('Punishment Added');
-        punishmentList.push(input.value);
-        input.value = '';
-        showOptions();
+    // if (input.value) {
+    console.log('Punishment Added');
+    punishmentList.push(input.value);
+    input.value = '';
+    showOptions();
 
-    }
 }
 
 const reset = function (e) {
