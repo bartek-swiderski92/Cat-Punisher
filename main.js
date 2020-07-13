@@ -30,52 +30,81 @@ const removeButtons = () => {
     removePunishmentBtn.addEventListener('click', removePunishment)
 }
 
-const showOptions = function () {
-    if (rewardList.length > 0) {
-        ulRewards.textContent = 'Rewards:';
-        for (let i = 0; i < rewardList.length; i++) {
-            // console.log(rewardList[i]);
-            const li = document.createElement('li');
-            const x = document.createElement('span');
-            x.innerHTML = ' X';
-            x.classList = `removeReward`
-            ulRewards.appendChild(li);
-            li.textContent = rewardList[i];
-            li.appendChild(x);
-        }
-    }
+// const showOptions = function () {
+//     ulRewards.textContent = 'Rewards:';
+//     ulPunishments.textContent = 'Punishments:';
 
-    if (punishmentList.length > 0) {
-        ulPunishments.textContent = 'Punishments:';
-        for (let i = 0; i < punishmentList.length; i++) {
-            // console.log(punishmentList[i]);
-            const li = document.createElement('li');
-            const x = document.createElement('span');
-            x.innerHTML = ' X';
-            x.classList = 'removePunishment'
-            ulPunishments.appendChild(li);
-            li.textContent = punishmentList[i];
-            li.appendChild(x);
+//     if (rewardList.length > 0) {
+//         for (let i = 0; i < rewardList.length; i++) {
+//             // console.log(rewardList[i]);
+//             const li = document.createElement('li');
+//             const x = document.createElement('span');
+//             x.innerHTML = ' X';
+//             x.classList = `removeReward`
+//             ulRewards.appendChild(li);
+//             li.textContent = rewardList[i];
+//             li.appendChild(x);
+//         }
+//     }
+
+//     if (punishmentList.length > 0) {
+//         for (let i = 0; i < punishmentList.length; i++) {
+//             // console.log(punishmentList[i]);
+//             const li = document.createElement('li');
+//             const x = document.createElement('span');
+//             x.innerHTML = ' X';
+//             x.classList = 'removePunishment'
+//             ulPunishments.appendChild(li);
+//             li.textContent = punishmentList[i];
+//             li.appendChild(x);
+//         }
+//     }
+//     // removeButtons();
+// }
+
+const showOptions = function () {
+    ulRewards.textContent = 'Rewards:';
+    ulPunishments.textContent = 'Punishments:';
+    if (rewardList.length < 0) {
+        for (let i = 0; i < rewardList.length; i++) {
+            addElemToList(ulRewards, rewardList, 'removeReward');
         }
     }
-    removeButtons();
+    if (punishmentList.length > 0) {
+        for (let i = 0; i < punishmentList.length; i++) {
+            addElemToList(ulPunishments, punishmentList, 'removePunishment');
+        }
+    }
 }
 
+function addElemToList(ulElementList, list, removeClass) {
+    const li = document.createElement('li');
+    const x = document.createElement('span');
+    x.innerHTML = ' X';
+    x.classList = removeClass;
+    ulElementList.appendChild(li);
+    li.textContent = list[i]
+    li.appendChild(x);
+
+}
 
 const addReward = function (e) {
     e.preventDefault();
     if (input.value) {
-        // for (let reward of rewardList) {
-        //     if (reward === input.value)
-        //         console.log('Same value');
-        //     // return
-        // }
-        // console.log('Reward Added');
+        for (let reward of rewardList) {
+            if (reward === input.value) {
+                console.log('Same value');
+                alert('The option has been added alredy!')
+                return
+            }
+        }
+        console.log('Reward Added');
         rewardList.push(input.value);
         input.value = '';
         showOptions();
     }
 }
+
 const addPunishment = function (e) {
     e.preventDefault();
     // if (input.value) {
@@ -97,27 +126,25 @@ const reset = function (e) {
     showOptions();
 
 }
+
 const generateReward = () => {
-    if (rewardList.length > 0) {
-        console.log('Reward Generated')
-        const index = Math.floor(Math.random() * rewardList.length);
-        h1.textContent = '';
-        setTimeout(() => {
-            h1.textContent = rewardList[index];
-        }, 400);
-    }
-}
-const generatePunishment = () => {
-    if (punishmentList.length > 0) {
-        console.log('Punishment Generated')
-        const index = Math.floor(Math.random() * punishmentList.length);
-        h1.textContent = '';
-        setTimeout(() => {
-            h1.textContent = punishmentList[index];
-        }, 400);
-    }
+    generate(rewardList, 'Reward Generated')
 }
 
+const generatePunishment = () => {
+    generate(punishmentList, 'Punisment Generated')
+}
+
+function generate(list, message) {
+    if (list.length > 0) {
+        console.log(message)
+        const index = Math.floor(Math.random() * list.length);
+        h1.textContent = '';
+        setTimeout(() => {
+            h1.textContent = list[index];
+        }, 400);
+    }
+}
 
 
 const options = () => {
@@ -133,8 +160,6 @@ const options = () => {
         ulPunishments.style.display = 'none';
     }
 }
-
-
 
 rewardBtn.addEventListener('click', addReward);
 punishBtn.addEventListener('click', addPunishment);
