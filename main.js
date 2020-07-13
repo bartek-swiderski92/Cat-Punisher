@@ -13,77 +13,45 @@ const ulRewards = document.querySelector('#rewards');
 const ulPunishments = document.querySelector('#punishments')
 
 
-const removeButtons = () => {
-    const removeRewardBtn = document.querySelector('.removeReward');
-    const removePunishmentBtn = document.querySelector('.removePunishment');
+// const removeButtons = () => {
+//     const removeRewardBtn = document.querySelector('.removeReward');
+//     const removePunishmentBtn = document.querySelector('.removePunishment');
 
-    const removeReward = () => {
-        console.log(rewardList.indexOf('Reward1'));
+//     const removeReward = () => {
+//         console.log(rewardList.indexOf('Reward1'));
 
-    }
-
-    const removePunishment = () => {
-        console.log('click');
-    }
-
-    removeRewardBtn.addEventListener('click', removeReward)
-    removePunishmentBtn.addEventListener('click', removePunishment)
-}
-
-// const showOptions = function () {
-//     ulRewards.textContent = 'Rewards:';
-//     ulPunishments.textContent = 'Punishments:';
-
-//     if (rewardList.length > 0) {
-//         for (let i = 0; i < rewardList.length; i++) {
-//             // console.log(rewardList[i]);
-//             const li = document.createElement('li');
-//             const x = document.createElement('span');
-//             x.innerHTML = ' X';
-//             x.classList = `removeReward`
-//             ulRewards.appendChild(li);
-//             li.textContent = rewardList[i];
-//             li.appendChild(x);
-//         }
 //     }
 
-//     if (punishmentList.length > 0) {
-//         for (let i = 0; i < punishmentList.length; i++) {
-//             // console.log(punishmentList[i]);
-//             const li = document.createElement('li');
-//             const x = document.createElement('span');
-//             x.innerHTML = ' X';
-//             x.classList = 'removePunishment'
-//             ulPunishments.appendChild(li);
-//             li.textContent = punishmentList[i];
-//             li.appendChild(x);
-//         }
+//     const removePunishment = () => {
+//         console.log('click');
 //     }
-//     // removeButtons();
+
+//     removeRewardBtn.addEventListener('click', removeReward)
+//     removePunishmentBtn.addEventListener('click', removePunishment)
 // }
 
 const showOptions = function () {
     ulRewards.textContent = 'Rewards:';
     ulPunishments.textContent = 'Punishments:';
-    if (rewardList.length < 0) {
+    if (rewardList.length > 0) {
         for (let i = 0; i < rewardList.length; i++) {
-            addElemToList(ulRewards, rewardList, 'removeReward');
+            addElemToList(ulRewards, rewardList, 'removeReward', i);
         }
     }
     if (punishmentList.length > 0) {
         for (let i = 0; i < punishmentList.length; i++) {
-            addElemToList(ulPunishments, punishmentList, 'removePunishment');
+            addElemToList(ulPunishments, punishmentList, 'removePunishment', i);
         }
     }
 }
 
-function addElemToList(ulElementList, list, removeClass) {
+function addElemToList(ulElementList, list, removeClass, index) {
     const li = document.createElement('li');
     const x = document.createElement('span');
     x.innerHTML = ' X';
     x.classList = removeClass;
     ulElementList.appendChild(li);
-    li.textContent = list[i]
+    li.textContent = list[index];
     li.appendChild(x);
 
 }
