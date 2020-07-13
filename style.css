@@ -27,11 +27,19 @@ h1 {
 
 
 
-/* ul {
+ul {
     display: none;
     font-size: 2em;
+    position: absolute;
+    margin: 50px;
+}
 
-} */
+#punishments {
+    margin-left: 300px;
+    margin-top: 50px;
+}
+
+
 
 li {
     font-size: 1rem;
