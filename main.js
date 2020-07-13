@@ -7,8 +7,8 @@ const generRewardBtn = document.querySelector('.generateReward');
 const generPunishBtn = document.querySelector('.generatePunishment');
 const showBtn = document.querySelector('#show');
 input.value = '';
-const rewardList = ['Drapanie Karczku', 'Oklep Tyłka', 'Chodź masz', 'Pusi Nusia'];
-const punishmentList = ['Szlaban na polko', 'Krzyczenie Mamy', 'Przytulanie Mamy'];
+const rewardList = ['Reward1', 'Reward2', 'Reward3', 'Reward4'];
+const punishmentList = ['Punishment1', 'Punishment2', 'Punishment3'];
 const ulRewards = document.querySelector('#rewards');
 const ulPunishments = document.querySelector('#punishments')
 
@@ -25,8 +25,8 @@ const removeButtons = () => {
         console.log('click');
     }
 
-    removeRewardBtn.addEventListener('click', removeReward)
-    removePunishmentBtn.addEventListener('click', removePunishment)
+    // removeRewardBtn.addEventListener('click', removeReward)
+    // removePunishmentBtn.addEventListener('click', removePunishment)
 }
 
 const showOptions = function () {
@@ -39,7 +39,7 @@ const showOptions = function () {
             x.innerHTML = ' X';
             x.classList = `removeReward${i}`
             ulRewards.appendChild(li);
-            li.textContent = rewardList;
+            li.textContent = rewardList[i];
             li.appendChild(x);
         }
     }
