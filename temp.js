@@ -70,3 +70,30 @@ function createList(array) {
             }, false
     }
 }
+
+function removeElementFromList(arrayRemove, arrayOptions) {
+    for (let i = 0; i < arrayRemove.length; i++) {
+        arrayRemove[i].addEventListener('click', function () {
+            arrayOptions.splice(i, 1);
+            showOptions();
+        })
+
+    }
+}
+
+function addElemToArray(elementList, event) {
+    event.preventdefault();
+    if (input.value) {
+        for (let element of elementList) {
+            if (element === input.value) {
+                console.log('Same Value');
+                alert('The option has been already added!')
+                return
+            }
+        }
+    }
+    console.log('Element Added');
+    elementList.push(input.value);
+    input.value = '';
+    showOptions();
+}

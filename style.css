@@ -23,6 +23,11 @@ body {
 
 h1 {
     height: 50px;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
 }
 
 
@@ -32,6 +37,7 @@ ul {
     font-size: 2em;
     position: absolute;
     margin: 50px;
+    list-style-type: none;
 }
 
 #punishments {
@@ -44,4 +50,16 @@ ul {
 li {
     font-size: 1rem;
     margin: auto;
+}
+
+.removeReward,
+.removePunishment {
+    color: #ccc;
+    cursor: pointer;
+}
+
+.removeReward:hover,
+.removePunishment:hover {
+    font-weight: 800;
+    color: red;
 }

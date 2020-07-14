@@ -13,23 +13,6 @@ const ulRewards = document.querySelector('#rewards');
 const ulPunishments = document.querySelector('#punishments')
 
 
-// const removeButtons = () => {
-//     const removeRewardBtn = document.querySelector('.removeReward');
-//     const removePunishmentBtn = document.querySelector('.removePunishment');
-
-//     const removeReward = () => {
-//         console.log(rewardList.indexOf('Reward1'));
-
-//     }
-
-//     const removePunishment = () => {
-//         console.log('click');
-//     }
-
-//     removeRewardBtn.addEventListener('click', removeReward)
-//     removePunishmentBtn.addEventListener('click', removePunishment)
-// }
-
 const showOptions = function () {
     ulRewards.textContent = 'Rewards:';
     ulPunishments.textContent = 'Punishments:';
@@ -42,6 +25,22 @@ const showOptions = function () {
         for (let i = 0; i < punishmentList.length; i++) {
             addElemToList(ulPunishments, punishmentList, 'removePunishment', i);
         }
+
+    }
+    const arrayRmvReward = document.querySelectorAll('.removeReward');
+    const arrayRmvPunishment = document.querySelectorAll('.removePunishment');
+
+    removeElementFromList(arrayRmvReward, rewardList);
+    removeElementFromList(arrayRmvPunishment, punishmentList);
+}
+
+function removeElementFromList(arrayRemove, arrayOptions) {
+    for (let i = 0; i < arrayRemove.length; i++) {
+        arrayRemove[i].addEventListener('click', function () {
+            arrayOptions.splice(i, 1);
+            showOptions();
+        })
+
     }
 }
 
@@ -54,33 +53,52 @@ function addElemToList(ulElementList, list, removeClass, index) {
     li.textContent = list[index];
     li.appendChild(x);
 
+
 }
 
-const addReward = function (e) {
-    e.preventDefault();
+// const addReward = function (e) {
+//     e.preventDefault();
+//     if (input.value) {
+//         for (let reward of rewardList) {
+//             if (reward === input.value) {
+//                 console.log('Same value');
+//                 alert('The option has been added alredy!')
+//                 return
+//             }
+//         }
+//         console.log('Reward Added');
+//         rewardList.push(input.value);
+//         input.value = '';
+//         showOptions();
+//     }
+// }
+
+// const addPunishment = function (e) {
+//     e.preventDefault();
+//     // if (input.value) {
+//     console.log('Punishment Added');
+//     punishmentList.push(input.value);
+//     input.value = '';
+//     showOptions();
+
+// }
+
+
+
+function addElemToArray(elementList) {
     if (input.value) {
-        for (let reward of rewardList) {
-            if (reward === input.value) {
-                console.log('Same value');
-                alert('The option has been added alredy!')
+        for (let element of elementList) {
+            if (element === input.value) {
+                console.log('Same Value');
+                alert('The option has been already added!')
                 return
             }
         }
-        console.log('Reward Added');
-        rewardList.push(input.value);
-        input.value = '';
-        showOptions();
     }
-}
-
-const addPunishment = function (e) {
-    e.preventDefault();
-    // if (input.value) {
-    console.log('Punishment Added');
-    punishmentList.push(input.value);
+    elementList.push(input.value);
     input.value = '';
+    console.log('Element Added');
     showOptions();
-
 }
 
 const reset = function (e) {
@@ -129,8 +147,8 @@ const options = () => {
     }
 }
 
-rewardBtn.addEventListener('click', addReward);
-punishBtn.addEventListener('click', addPunishment);
+rewardBtn.addEventListener('click', addElemToArray(rewardList));
+punishBtn.addEventListener('click', addElemToArray(punishmentList));
 resetBtn.addEventListener('click', reset);
 generPunishBtn.addEventListener('click', generatePunishment);
 generRewardBtn.addEventListener('click', generateReward);
