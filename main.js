@@ -10,7 +10,9 @@ input.value = '';
 const rewardList = ['Reward1', 'Reward2', 'Reward3', 'Reward4'];
 const punishmentList = ['Punishment1', 'Punishment2', 'Punishment3'];
 const ulRewards = document.querySelector('#rewards');
-const ulPunishments = document.querySelector('#punishments')
+const ulPunishments = document.querySelector('#punishments');
+const addRew = () => addElemToArray(rewardList);
+const addPun = () => addElemToArray(punishmentList);
 
 
 const showOptions = function () {
@@ -25,11 +27,9 @@ const showOptions = function () {
         for (let i = 0; i < punishmentList.length; i++) {
             addElemToList(ulPunishments, punishmentList, 'removePunishment', i);
         }
-
     }
     const arrayRmvReward = document.querySelectorAll('.removeReward');
     const arrayRmvPunishment = document.querySelectorAll('.removePunishment');
-
     removeElementFromList(arrayRmvReward, rewardList);
     removeElementFromList(arrayRmvPunishment, punishmentList);
 }
@@ -40,7 +40,6 @@ function removeElementFromList(arrayRemove, arrayOptions) {
             arrayOptions.splice(i, 1);
             showOptions();
         })
-
     }
 }
 
@@ -52,41 +51,10 @@ function addElemToList(ulElementList, list, removeClass, index) {
     ulElementList.appendChild(li);
     li.textContent = list[index];
     li.appendChild(x);
-
-
 }
 
-// const addReward = function (e) {
-//     e.preventDefault();
-//     if (input.value) {
-//         for (let reward of rewardList) {
-//             if (reward === input.value) {
-//                 console.log('Same value');
-//                 alert('The option has been added alredy!')
-//                 return
-//             }
-//         }
-//         console.log('Reward Added');
-//         rewardList.push(input.value);
-//         input.value = '';
-//         showOptions();
-//     }
-// }
-
-// const addPunishment = function (e) {
-//     e.preventDefault();
-//     // if (input.value) {
-//     console.log('Punishment Added');
-//     punishmentList.push(input.value);
-//     input.value = '';
-//     showOptions();
-
-// }
-
-
-
 function addElemToArray(elementList) {
-    if (input.value) {
+    if (input.value.length > 0) {
         for (let element of elementList) {
             if (element === input.value) {
                 console.log('Same Value');
@@ -94,11 +62,13 @@ function addElemToArray(elementList) {
                 return
             }
         }
+        elementList.push(input.value);
+        input.value = '';
+        console.log('Element Added');
+        showOptions();
+    } else {
+        alert('Please insert value!')
     }
-    elementList.push(input.value);
-    input.value = '';
-    console.log('Element Added');
-    showOptions();
 }
 
 const reset = function (e) {
@@ -110,28 +80,36 @@ const reset = function (e) {
     ulRewards.textContent = '';
     ulPunishments.textContent = '';
     showOptions();
-
 }
 
 const generateReward = () => {
-    generate(rewardList, 'Reward Generated')
+    generate(rewardList, 'Reward Generated');
+    h1.style.color = 'green';
 }
 
 const generatePunishment = () => {
-    generate(punishmentList, 'Punisment Generated')
+    generate(punishmentList, 'Punisment Generated');
+    h1.style.color = 'red';
 }
 
 function generate(list, message) {
-    if (list.length > 0) {
+    if (list.length > 1) {
         console.log(message)
-        const index = Math.floor(Math.random() * list.length);
+        let index = Math.floor(Math.random() * list.length);
+        while (h1.textContent == list[index]) {
+            index = Math.floor(Math.random() * list.length);
+            console.log('losuje');
+        }
         h1.textContent = '';
         setTimeout(() => {
             h1.textContent = list[index];
         }, 400);
+    } else if (list.length == 1) {
+        alert('Please add one more option!')
+    } else {
+        alert('Please add at least two more options!')
     }
 }
-
 
 const options = () => {
 
@@ -147,8 +125,8 @@ const options = () => {
     }
 }
 
-rewardBtn.addEventListener('click', addElemToArray(rewardList));
-punishBtn.addEventListener('click', addElemToArray(punishmentList));
+rewardBtn.addEventListener('click', addRew);
+punishBtn.addEventListener('click', addPun);
 resetBtn.addEventListener('click', reset);
 generPunishBtn.addEventListener('click', generatePunishment);
 generRewardBtn.addEventListener('click', generateReward);
